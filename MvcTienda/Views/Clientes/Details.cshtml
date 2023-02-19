@@ -1,0 +1,139 @@
+﻿@model MvcTienda.Models.Cliente
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Poblacion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Poblacion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CodigoPostal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CodigoPostal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nif)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nif)
+        </dd>
+    </dl>
+</div>
+<div>Mis Pedidos</div>
+@*<div>
+    <table class="table border-botton">
+        <tr>
+            <th></th>
+            <th>Id Producto</th>
+            <th>Descripcion del producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Descuento</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Pedidos)
+        {
+            <tr>
+                <td>
+                    @{
+                        var nombreImagen = "imagen-no-disponible.jpg";
+                        if (item.Producto.Imagen != null)
+                        {
+                            nombreImagen = item.Producto.Imagen;
+                        }
+                    }
+                    <img style="width: 50px; height: 50px;" src="~/imagenes/@nombreImagen" alt="No funciona" asp-asp-append-version="true">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.Precio)
+                </td>
+                <td>
+                    <p>0,00</p>
+                </td>
+                <td>
+                    @{
+                        decimal precio = 0;
+                        decimal total = 0;
+
+                        precio = item.Precio * item.Cantidad;
+
+                        total = total + precio;
+                    }
+
+                    <p>@precio</p>
+                </td>
+            </tr>
+
+        }
+        @{
+            decimal totalProducto = 0;
+            decimal totalFinal = 0;
+        }
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Total:</th>
+            <th>
+                @foreach (var item in Model.Pedidos)
+                {
+                    totalProducto = item.Precio * item.Cantidad;
+                    totalFinal = totalFinal + totalProducto;
+                }
+                @totalFinal
+            </th>
+        </tr>
+    </table>
+</div>*@
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
