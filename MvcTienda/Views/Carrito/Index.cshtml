@@ -172,13 +172,11 @@
             <th>
                 @foreach (var item in Model.Detalles)
                 {
-                    totalProducto = item.Precio * item.Cantidad;
+                    totalProducto = (item.Precio * item.Cantidad) - item.Descuento;
                     totalFinal = totalFinal + totalProducto;
                 }
-                @{
-                    decimal totalcondescuento = totalFinal - descuento;
-                }
-                @totalcondescuento
+
+                @totalFinal
             </th>
         </tr>
     </table>
