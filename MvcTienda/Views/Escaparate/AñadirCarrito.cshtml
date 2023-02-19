@@ -95,6 +95,30 @@
         </dd>
     </dl>
 </div>
+@* Tarjetas de productos *@@*
+        <div class="col-lg-9 col-md-12 col-sm-12">
+            <div class="row">
+                @foreach (var item in ViewData["LisProductos"] as IEnumerable<Producto>)
+                {
+                    <div class="card" style="width:240px; height:450px; text-align: center;">
+                        <div>
+                           
+                            <img src="~/imagenes/@nombreImagen" class="card-img-top" style="width:150px;height:150px" alt="No Funciona" asp-append-version="true">
+                        </div>
+                        <div class="card-body" style="height: auto">
+                            <p class="card-text" style="height:50px;">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                            <h2>@string.Format("{0:c}", item.Precio)</h2>
+                        </div>
+                        <div class="card-footer">
+                            <a asp-action="AñadirCarrito" asp-route-id="@item.Id" class="btn btn-success">Añadir al carrito</a>
+                        </div>
+
+                    </div>
+
+                    
+                }
+            </div>
+        </div>*@
 <br />
 
 <div>

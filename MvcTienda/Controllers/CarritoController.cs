@@ -362,6 +362,26 @@ namespace MvcTienda.Controllers
             pedido.EstadoId = 2;
             pedido.Confirmado = DateTime.Now;
 
+
+            return View("Pagar");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Pagar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var pedido = await _context.Pedidos.FindAsync(id);
+
+            // Se cambia el estado del pedido a confirmado
+
+            pedido.EstadoId = 3;
+            pedido.Confirmado = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 try

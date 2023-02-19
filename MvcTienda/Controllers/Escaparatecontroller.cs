@@ -162,14 +162,11 @@ namespace MvcTienda.Controllers
             }
 
             //Aplicar descuento
-            var Cupon = strCupon.Trim();
+            var Cupon = strCupon;
             decimal descuentoaplicar = 0;
             if (Cupon == "" || Cupon == null)
             {
-                if (producto == null)
-                {
-                    return NotFound();
-                }
+                descuentoaplicar = 0;
 
                 return View(producto);
             }
