@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using MvcTienda.Data;
 using MvcTienda.Models;
 using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcTienda.Controllers
 {
+    [Authorize(Roles = "Usuario")]
     public class CarritoController : Controller
     {
         private readonly MvcTiendaContexto _context;

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MvcTienda.Controllers
 {
+    [Authorize(Roles = "Usuario")]
     public class Escaparatecontroller : Controller
     {
         private readonly MvcTiendaContexto _context;

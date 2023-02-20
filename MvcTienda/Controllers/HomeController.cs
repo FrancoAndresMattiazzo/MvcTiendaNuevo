@@ -28,7 +28,7 @@ namespace MvcTienda.Controllers
             {
                 return RedirectToAction("Create", "MisDatos");
             }
-            return View();
+            return RedirectToAction("Index", "Escaparate");
         }
 
         public IActionResult Privacy()

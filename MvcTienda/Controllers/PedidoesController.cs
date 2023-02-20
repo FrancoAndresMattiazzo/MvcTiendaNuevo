@@ -173,6 +173,8 @@ namespace MvcTienda.Controllers
           return _context.Pedidos.Any(e => e.Id == id);
         }
     }*/
+    
+    [Authorize(Roles = "Administrador")]
     public class PedidoesController : Controller
     {
         private readonly MvcTiendaContexto _context;

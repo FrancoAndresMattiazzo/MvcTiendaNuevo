@@ -9,9 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using MvcTienda.Data;
 using MvcTienda.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcTienda.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class ProductoesController : Controller
     {
         private readonly MvcTiendaContexto _context;
