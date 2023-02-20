@@ -63,8 +63,18 @@ namespace MvcTienda.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descripcion,Texto,Precio,PrecioCadena,Stock,Escaparate,Imagen,CategoriaId")] Producto producto)
+        public async Task<IActionResult> Create([Bind("Id,Descripcion,Texto,Precio,PrecioCadena,Stock,Escaparate,Imagen,CategoriaId")] Producto producto, IFormFile imagen)
         {
+            string strRutaImagenes = Path.Combine(_webHostEnvironment.WebRootPath, "./imagenes");
+            string strExtension = Path.GetExtension(imagen.FileName);
+            string strNombreFichero = producto.Id.ToString() + strExtension;
+            string strRutaFichero = Path.Combine(strRutaImagenes, strNombreFichero);
+            using (var fileStream = new FileStream(strRutaFichero, FileMode.Create))
+            {
+                imagen.CopyTo(fileStream);
+            }
+            // Actualizar producto con nueva imagen
+            producto.Imagen = strNombreFichero;
             if (ModelState.IsValid)
             {
                 _context.Add(producto);
