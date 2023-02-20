@@ -95,10 +95,11 @@
         </dd>
     </dl>
 </div>
-@* Tarjetas de productos *@@*
+<h2 class="text-center">Productos Relacionados</h2>
+@* Tarjetas de productos *@
         <div class="col-lg-9 col-md-12 col-sm-12">
             <div class="row">
-                @foreach (var item in ViewData["LisProductos"] as IEnumerable<Producto>)
+                @foreach (var item in ViewData["ListaProductos"] as IEnumerable<Producto>)
                 {
                     <div class="card" style="width:240px; height:450px; text-align: center;">
                         <div>
@@ -118,7 +119,7 @@
                     
                 }
             </div>
-        </div>*@
+        </div>
 <br />
 
 <div>

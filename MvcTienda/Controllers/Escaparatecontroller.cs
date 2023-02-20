@@ -45,7 +45,9 @@ namespace MvcTienda.Controllers
             ViewData["ListaCategorias"] = _context.Categorias.OrderBy(c => c.Descripcion).ToList();
 
             productos = productos.Include(x => x.Categoria)
-                .Where(x => x.Escaparate == true);
+                .Where(x => x.Escaparate == true)
+                .Where(x => x.Stock > 0);
+         
  
 
             return View(await productos.ToListAsync());
@@ -141,6 +143,13 @@ namespace MvcTienda.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["ListaProductos"] = _context.Productos
+                .Where( x => x.Escaparate == true)
+                .Where( x => x.Categoria == producto.Categoria)
+                .Where( x => x.Id != producto.Id)
+                .Where(x => x.Stock > 0)
+                .OrderBy(c => c.Descripcion).ToList();
 
             return View(producto);
         }
