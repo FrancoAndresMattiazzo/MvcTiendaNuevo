@@ -209,7 +209,7 @@ namespace MvcTienda.Controllers
             if (ModelState.IsValid)
             {
                 // Copiar archivo de imagen
-                string strRutaImagenes = Path.Combine(_webHostEnvironment.WebRootPath, "/imagenes");
+                string strRutaImagenes = Path.Combine(_webHostEnvironment.WebRootPath, "./imagenes");
                 string strExtension = Path.GetExtension(imagen.FileName);
                 string strNombreFichero = producto.Id.ToString() + strExtension;
                 string strRutaFichero = Path.Combine(strRutaImagenes, strNombreFichero);
