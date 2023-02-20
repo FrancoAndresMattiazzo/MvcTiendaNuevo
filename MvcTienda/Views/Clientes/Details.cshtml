@@ -54,7 +54,83 @@
         </dd>
     </dl>
 </div>
-<div>Mis Pedidos</div>
+<div>Pedidos Realizados</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Estado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in ViewData["ListaPedidos"] as IEnumerable<Pedido>) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado.Descripcion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Pedidoes" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-controller="Pedidoes" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-controller="Pedidoes" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@*<div class="col-lg-9 col-md-12 col-sm-12">
+            <div class="row">
+                @foreach (var item in ViewData["ListaPedidos"] as IEnumerable<Pedido>)
+                {
+<tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Confirmado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preparado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enviado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cobrado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Devuelto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anulado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado.Descripcion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+
+                    
+                }
+            </div>
+        </div>
+
+
 @*<div>
     <table class="table border-botton">
         <tr>

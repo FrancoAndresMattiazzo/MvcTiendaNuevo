@@ -252,6 +252,10 @@ namespace MvcTienda.Controllers
         public async Task<IActionResult> EliminarLinea(int id)
         {
             var detalle = await _context.Detalles.FindAsync(id);
+
+            var producto = await _context.Productos.FindAsync(detalle.ProductoId);
+            producto.Stock = producto.Stock + detalle.Cantidad;
+            
             _context.Detalles.Remove(detalle);
             await _context.SaveChangesAsync();
 
@@ -275,10 +279,13 @@ namespace MvcTienda.Controllers
             }
 
             var detalle = await _context.Detalles.FindAsync(id);
-            detalle.Cantidad = detalle.Cantidad + 1;
-
             var producto = await _context.Productos.FindAsync(detalle.ProductoId);
-            producto.Stock = producto.Stock - 1;
+
+            if(producto.Stock > 0)
+            {
+                detalle.Cantidad = detalle.Cantidad + 1;
+                producto.Stock = producto.Stock - 1;
+            }
 
             if (ModelState.IsValid)
             {
@@ -406,7 +413,7 @@ namespace MvcTienda.Controllers
             // Se cambia el estado del pedido a confirmado
 
             pedido.EstadoId = 3;
-            pedido.Confirmado = DateTime.Now;
+            pedido.Cobrado = DateTime.Now;
 
             if (ModelState.IsValid)
             {

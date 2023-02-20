@@ -177,7 +177,6 @@ namespace MvcTienda.Controllers
             {
                 descuentoaplicar = 0;
 
-                return View(producto);
             }
             if (Cupon == "Aplicar50")
             {

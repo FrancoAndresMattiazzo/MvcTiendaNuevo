@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcTienda.Data;
 using MvcTienda.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace MvcTienda.Controllers
 {
@@ -20,12 +21,18 @@ namespace MvcTienda.Controllers
         }
 
         // GET: Clientes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
             var Cliente = await _context.Clientes.ToListAsync();
             var Pedido = await _context.Pedidos.ToListAsync();
 
-              return View(Cliente);
+            var clientes = from s in _context.Clientes
+                            select s;
+            int pageSize = 3;
+            return View(await PaginatedList<Cliente>.CreateAsync(clientes.AsNoTracking(),
+            pageNumber ?? 1, pageSize));
+
+            //return View(Cliente);
         }
 
         // GET: Clientes/Details/5
@@ -42,6 +49,11 @@ namespace MvcTienda.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["ListaPedidos"] = _context.Pedidos
+                .Where(x => x.ClienteId == id)
+                .Include(a => a.Estado)
+                .OrderBy(c => c.Id).ToList();
 
             return View(cliente);
         }

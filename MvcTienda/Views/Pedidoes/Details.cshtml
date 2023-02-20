@@ -104,15 +104,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Producto.Precio)
                 </td>
-                <td>
-                    <p>0,00</p>
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.Descuento)</td>
                 <td>
                     @{
                         decimal precio = 0;
                         decimal total = 0;
 
-                        precio = item.Precio * item.Cantidad;
+                        precio = (item.Precio * item.Cantidad) - item.Descuento;
 
                         total = total + precio;
                     }
@@ -132,19 +130,24 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
             <th>Total:</th>
             <th>
                 @foreach (var item in Model.Detalles)
                 {
-                    totalProducto = item.Precio * item.Cantidad;
+                    totalProducto = (item.Precio * item.Cantidad) - item.Descuento;
                     totalFinal = totalFinal + totalProducto;
                 }
+
                 @totalFinal
             </th>
         </tr>
     </table>
     </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> 
     <a asp-action="Index">Back to List</a>
+</div>
+<div class="d-print-none text-center">
+ <a class="btn btn-primary" href="javascript:window.print()">Imprimir</a>
 </div>

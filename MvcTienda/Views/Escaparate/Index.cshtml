@@ -13,6 +13,7 @@
         @*Categorias*@
         <div class="col-lg-3 col-md-12 col-sm-12">
             <table class="table">
+                <a asp-controller="Home" asp-action="Index">Mostrar Todos</a>
                 @foreach (var i in ViewData["ListaCategorias"] as IEnumerable<Categoria>)
                 {
                     <tr>

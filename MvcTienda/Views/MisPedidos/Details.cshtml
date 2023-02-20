@@ -11,6 +11,12 @@
     <h4>Pedido</h4>
     <hr />
     <dl class="row">
+         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Fecha)
         </dt>
@@ -111,18 +117,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Producto.Precio)
                 </td>
-                <td>
-                    <p>0,00</p>
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.Descuento)</td>
                 <td>
                     @{
                         decimal precio = 0;
                         decimal total = 0;
 
-                        precio = item.Precio * item.Cantidad;
+                        precio = (item.Precio * item.Cantidad) - item.Descuento;
 
-                        total = precio + precio;
-
+                        total = total + precio;
                     }
 
                     <p>@precio</p>
@@ -144,11 +147,12 @@
             <th></th>
             <th>Total:</th>
             <th>
-                @foreach (var item in Model.Detalles)
+               @foreach (var item in Model.Detalles)
                 {
-                    totalProducto = item.Precio * item.Cantidad;
+                    totalProducto = (item.Precio * item.Cantidad) - item.Descuento;
                     totalFinal = totalFinal + totalProducto;
                 }
+
                 @totalFinal
             </th>
         </tr>
@@ -158,14 +162,14 @@
 
 @if (Model.EstadoId == 1)
 {
-    <form asp-action="ConfirmarPedido" class="container-fluid text-center">
-        <input class="btn btn-success" type="submit" value="Confirmar Pedido" asp-action="ConfirmarPedido" asp-controller="Carrito" asp-route-id="@Model.Id" />
+       <form asp-action="ConfirmarPedido" class="container-fluid text-center">
+        <input class="btn btn-success" type="submit" value="Confirma Pedido" asp-action="ConfirmarPedido" asp-controller="Carrito" asp-route-id="@Model.Id" />
     </form>
 }
 else
 {
-    <form asp-action="ConfirmarPedido" class="container-fluid text-center" hidden>
-        <input class="btn btn-success" type="submit" value="Confirmar Pedido" asp-action="ConfirmarPedido" asp-controller="Carrito" asp-route-id="@Model.Id" />
+        <form asp-action="ConfirmarPedido" class="container-fluid text-center" hidden>
+        <input class="btn btn-success" type="submit" value="Confirma Pedido" asp-action="ConfirmarPedido" asp-controller="Carrito" asp-route-id="@Model.Id" />
     </form>
 }
 
@@ -173,4 +177,6 @@ else
 <div>
     <a asp-action="Index">Volver a mis pedidos</a>
 </div>
-
+<div class="d-print-none text-center">
+ <a class="btn btn-primary" href="javascript:window.print()">Imprimir</a>
+</div>

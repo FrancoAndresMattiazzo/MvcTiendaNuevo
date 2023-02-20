@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcTienda.Data;
 using MvcTienda.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace MvcTienda.Controllers
 {
@@ -71,6 +72,51 @@ namespace MvcTienda.Controllers
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Descripcion", producto.CategoriaId);
             return View(producto);
         }
+
+        /*if (id == null)
+            {
+                return NotFound();
+            }
+            var producto = await _context.Productos.FindAsync(id);
+            if (producto == null)
+            {
+                return NotFound();
+            }
+            if (imagen == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                // Copiar archivo de imagen
+                string strRutaImagenes = Path.Combine(_webHostEnvironment.WebRootPath, "/imagenes");
+                string strExtension = Path.GetExtension(imagen.FileName);
+                string strNombreFichero = producto.Id.ToString() + strExtension;
+                string strRutaFichero = Path.Combine(strRutaImagenes, strNombreFichero);
+                using (var fileStream = new FileStream(strRutaFichero, FileMode.Create))
+                {
+                    imagen.CopyTo(fileStream);
+                }
+                // Actualizar producto con nueva imagen
+                producto.Imagen = strNombreFichero;
+                try
+                {
+                    _context.Update(producto);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductoExists(producto.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return View(producto);*/
 
         // GET: Productoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
