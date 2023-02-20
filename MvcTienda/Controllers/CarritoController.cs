@@ -362,8 +362,34 @@ namespace MvcTienda.Controllers
             pedido.EstadoId = 2;
             pedido.Confirmado = DateTime.Now;
 
+            return RedirectToAction(nameof(Pagar));
+            // return View("Pagar");
+        }
 
-            return View("Pagar");
+        public async Task<IActionResult> Pagar()
+        {
+            int intNumeroPedido = 0;
+            string numeroPedido = HttpContext.Session.GetString("NumPedido");
+            if (numeroPedido == null)
+            {
+
+                return View("CarritoVacio");
+
+            }
+
+            intNumeroPedido = Convert.ToInt32(numeroPedido);
+            var pedido = await _context.Pedidos
+                                .Include(x => x.Cliente)
+                                .Include(x => x.Estado)
+                                .Include(x => x.Detalles)
+                                .ThenInclude(x => x.Producto)
+                                .FirstOrDefaultAsync(e => e.Id == intNumeroPedido);
+
+            if (pedido == null)
+            {
+                return NotFound();
+            }
+            return View(pedido);
         }
 
         [HttpPost]
