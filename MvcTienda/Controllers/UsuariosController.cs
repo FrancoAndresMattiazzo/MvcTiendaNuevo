@@ -48,13 +48,14 @@ namespace MvcTienda.Controllers
             user.Email = model.Email;
             string usuarioPWD = model.Password;
             var result = await _userManager.CreateAsync(user, usuarioPWD);
+            
             // Se asigna el rol de "Administrador" al usuario
             if (result.Succeeded)
             {
                 var result1 = await _userManager.AddToRoleAsync(user, "Administrador");
                 return RedirectToAction(nameof(Index));
             }
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

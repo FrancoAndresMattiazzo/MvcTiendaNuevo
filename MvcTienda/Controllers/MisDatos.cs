@@ -50,7 +50,7 @@ namespace MvcTienda.Controllers
             .FirstOrDefaultAsync();
             if (cliente == null)
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
             }
             return View(cliente);
         }

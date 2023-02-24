@@ -65,9 +65,12 @@ namespace MvcTienda.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Descripcion,Texto,Precio,PrecioCadena,Stock,Escaparate,Imagen,CategoriaId")] Producto producto, IFormFile imagen)
         {
+            int UltimoProducto = (from prod in _context.Productos select prod.Id).Max();
+            UltimoProducto = UltimoProducto + 1;
+
             string strRutaImagenes = Path.Combine(_webHostEnvironment.WebRootPath, "./imagenes");
             string strExtension = Path.GetExtension(imagen.FileName);
-            string strNombreFichero = producto.Id.ToString() + strExtension;
+            string strNombreFichero = UltimoProducto.ToString() + strExtension;
             string strRutaFichero = Path.Combine(strRutaImagenes, strNombreFichero);
             using (var fileStream = new FileStream(strRutaFichero, FileMode.Create))
             {

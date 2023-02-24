@@ -28,13 +28,15 @@
     </dl>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
+            Modelo
+            @*@Html.DisplayNameFor(model => model.Descripcion)*@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Texto)
+            Descripcion
+            @*@Html.DisplayNameFor(model => model.Texto)*@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Texto)
@@ -97,14 +99,21 @@
 </div>
 <h2 class="text-center">Productos Relacionados</h2>
 @* Tarjetas de productos *@
-        <div class="col-lg-9 col-md-12 col-sm-12">
+        <div class="col-lg-9 col-md-12 col-sm-12 text-center">
             <div class="row">
                 @foreach (var item in ViewData["ListaProductos"] as IEnumerable<Producto>)
                 {
                     <div class="card" style="width:240px; height:450px; text-align: center;">
                         <div>
+                            @{
+                    var nombreImagenRelacionado = "imagen-no-disponible.jpg";
+                    if (item.Imagen != null)
+                    {
+                        nombreImagenRelacionado = item.Imagen;
+                    }
+                }
                            
-                            <img src="~/imagenes/@nombreImagen" class="card-img-top" style="width:150px;height:150px" alt="No Funciona" asp-append-version="true">
+                            <img src="~/imagenes/@nombreImagenRelacionado" class="card-img-top" style="width:150px;height:150px" alt="No Funciona" asp-append-version="true">
                         </div>
                         <div class="card-body" style="height: auto">
                             <p class="card-text" style="height:50px;">@Html.DisplayFor(modelItem => item.Descripcion)</p>

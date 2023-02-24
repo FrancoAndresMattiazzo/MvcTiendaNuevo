@@ -138,6 +138,7 @@
         @{
             decimal totalProducto = 0;
             decimal totalFinal = 0;
+            int cantidadProducto = 0;
         }
         <tr>
             <th></th>
@@ -151,9 +152,10 @@
                 {
                     totalProducto = (item.Precio * item.Cantidad) - item.Descuento;
                     totalFinal = totalFinal + totalProducto;
+                    cantidadProducto = cantidadProducto + 1;
                 }
 
-                @totalFinal
+                @totalFinal.ToString("C");
             </th>
         </tr>
 
@@ -172,6 +174,10 @@ else
         <input class="btn btn-success" type="submit" value="Confirma Pedido" asp-action="ConfirmarPedido" asp-controller="Carrito" asp-route-id="@Model.Id" />
     </form>
 }
+
+<h3 class="container-fluid text-center">
+    Cantidad de productos en este pedido @cantidadProducto;
+</h3>
 
 
 <div>

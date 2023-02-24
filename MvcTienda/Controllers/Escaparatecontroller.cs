@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using MvcTienda.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace MvcTienda.Controllers
 {
-    [Authorize(Roles = "Usuario")]
     public class Escaparatecontroller : Controller
     {
         private readonly MvcTiendaContexto _context;

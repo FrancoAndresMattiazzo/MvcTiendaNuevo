@@ -46,9 +46,18 @@
                             <br />
                             <p>Unidades Disponibles: @Html.DisplayFor(modelItem => item.Stock)</p>
                         </div>
-                        <div class="card-footer">
-                            <a asp-action="AñadirCarrito" asp-route-id="@item.Id" class="btn btn-success">Añadir al carrito</a>
-                        </div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                             
+                        @if (User.IsInRole("Usuario"))
+                        {
+                            <div class="card-footer">
+                                <a asp-action="AñadirCarrito" asp-route-id="@item.Id" class="btn btn-success">Añadir al carrito</a>
+                            </div>
+                        }
+                        }
+                       
+                        
 
                     </div>
 
